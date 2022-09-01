@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductMapper">
+  <insert id="reg" parameterType="pvo">
+    insert into product (pid, pname, price, psize, pcount, image_file)
+    values (#{pid}, #{pname}, #{price}, #{psize}, #{pcount}, #{image_file})
+  </insert>
+  <insert id="ad" parameterType="pvo">
+    insert into cart (pname, price, psize, pcount)
+    values (#{pname}, #{price}, #{psize}, #{pcount})
+  </insert>
+    <select id="tlist" resultType="pvo">
+    select pid, pno, pname, price, psize, image_file
+    from product 
+    where pid = 1 
+    order by pno desc 
+  </select>
+    <select id="plist" resultType="pvo">
+    select pid, pno, pname, price, psize, image_file
+    from product 
+    where pid = 2 
+    order by pno desc 
+  </select>
+    <select id="olist" resultType="pvo">
+    select pid, pno, pname, price, psize, image_file
+    from product 
+    where pid = 3 
+    order by pno desc 
+  </select>
+    <select id="slist" resultType="pvo">
+    select pid, pno, pname, price, psize, image_file
+    from product 
+    where pid = 4 
+    order by pno desc 
+  </select>
+    <select id="alist" resultType="pvo">
+    select pid, pno, pname, price, psize, image_file
+    from product 
+    where pid = 5 
+    order by pno desc 
+  </select>
+  <select id="detail" parameterType="long" resultType="pvo">
+    select pid, pno, pname, price, psize, pcount, image_file
+    from product where pno = #{pno}
+  </select>
+  <update id="mod" parameterType="pvo">
+    update product set pid = #{pid}, pname = #{pname}, price = #{price},
+    image_file = #{image_file}
+    where pno = #{pno}
+  </update>
+  <delete id="del" parameterType="long">
+    delete from product where pno = #{pno}
+  </delete>
+  <update id="delFile" parameterType="long">
+    update product set image_file = NULL where pno = #{pno}
+  </update>
+  <select id="fileName" parameterType="long" resultType="string">
+    select image_file from product where pno = #{pno}
+  </select>
+  
+</mapper>
